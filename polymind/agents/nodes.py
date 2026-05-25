@@ -129,15 +129,32 @@ EXECUTOR_PROMPT = ChatPromptTemplate.from_messages([
 def _safe_exec(code: str) -> tuple[str, str, bool]:
     """Execute Python code in a restricted scope. Returns (stdout, stderr, success)."""
     stdout_buf, stderr_buf = io.StringIO(), io.StringIO()
+    
+    # Custom whitelisted importer
+    allowed_modules = {
+        "numpy", "pandas", "sklearn", "nltk", "spacy",
+        "transformers", "datasets", "json", "math", "statistics", "re"
+    }
+
+    def safe_import(name, globals=None, locals=None, fromlist=(), level=0):
+        base_name = name.split('.')[0]
+        if base_name in allowed_modules:
+            return __import__(name, globals, locals, fromlist, level)
+        raise ImportError(f"Import of module '{name}' is not allowed in this sandbox.")
+
+    safe_builtins = {
+        k: __builtins__[k]  # type: ignore
+        for k in ["print", "len", "range", "enumerate", "zip", "sorted",
+                  "list", "dict", "set", "tuple", "str", "int", "float",
+                  "bool", "min", "max", "sum", "abs", "round", "type",
+                  "isinstance", "hasattr", "getattr", "any", "all", "dir",
+                  "Exception", "ValueError", "TypeError", "KeyError", "IndexError", "RuntimeError"]
+        if k in ((__builtins__ or {}))
+    }
+    safe_builtins["__import__"] = safe_import
+
     safe_globals = {
-        "__builtins__": {
-            k: __builtins__[k]  # type: ignore
-            for k in ["print", "len", "range", "enumerate", "zip", "sorted",
-                      "list", "dict", "set", "tuple", "str", "int", "float",
-                      "bool", "min", "max", "sum", "abs", "round", "type",
-                      "isinstance", "hasattr", "getattr", "Exception", "ValueError"]
-            if k in ((__builtins__ or {}))
-        }
+        "__builtins__": safe_builtins
     }
     try:
         # Validate AST before exec

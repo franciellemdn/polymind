@@ -92,6 +92,39 @@ pytest tests/ -v
 
 ---
 
+## Fast & Simple Experiment Examples
+
+To run rapid experiments (taking under 30 seconds) that execute successfully in the sandbox and produce clear insights:
+
+### 1. Compare Classification Models (Logistic Regression vs. Naive Bayes)
+Test how baseline classifiers compare in speed and accuracy on synthetic text classification tasks.
+```bash
+python main.py run \
+  --task "Compare the training speed and accuracy of Logistic Regression vs Naive Bayes on a synthetic 500-sample classification dataset using scikit-learn" \
+  --max-iterations 1
+```
+* **Insight:** Logistic Regression often yields slightly higher accuracy on small text representation dimensions, whereas Naive Bayes is extremely fast and serves as a robust baseline.
+
+### 2. Feature Extraction Tuning (Char-Level n-grams)
+Evaluate how character n-gram configurations affect training performance.
+```bash
+python main.py run \
+  --task "How does character n-gram range (1-3 vs 3-5) affect training speed and accuracy on a synthetic classification task using TF-IDF and scikit-learn" \
+  --max-iterations 1
+```
+* **Insight:** High-order character n-gram ranges explode the feature space, leading to longer training times but helping capture sub-word structural semantics on spelling-noisy data.
+
+### 3. Stopwords Impact
+Analyze if filtering stopwords yields real utility on smaller dataset classification.
+```bash
+python main.py run \
+  --task "Does stopwords removal improve Logistic Regression classification accuracy on a synthetic 1000-sample sentiment task using scikit-learn" \
+  --max-iterations 1
+```
+* **Insight:** Stopwords removal dramatically reduces vocab size and training latency, but can sometimes degrade sentiment classifier accuracy if key negation or polarity words are filtered out.
+
+---
+
 ## Project Structure
 
 ```

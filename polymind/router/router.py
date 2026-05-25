@@ -208,13 +208,17 @@ class ModelRouter:
         return MODELS[preference.get(node_name, "llama3.1:8b")]
 
     def _pick_frontier(self, node_name: str) -> ModelSpec:
+        # Swap everything to Gemini 2.0 Flash for low latency and cost
+        return MODELS["google/gemini-2.0-flash-001"]
+
+    """def _pick_frontier(self, node_name: str) -> ModelSpec:
         preference = {
             "planner":     "google/gemini-2.0-flash-001",
             "executor":    "openai/gpt-4o",
             "critic":      "anthropic/claude-sonnet-4-5",
             "synthesizer": "anthropic/claude-sonnet-4-5",
         }
-        return MODELS[preference.get(node_name, "anthropic/claude-sonnet-4-5")]
+        return MODELS[preference.get(node_name, "anthropic/claude-sonnet-4-5")]"""
 
     def _build_llm(self, spec: ModelSpec, **kwargs: Any) -> Any:
         if spec.provider == Provider.OLLAMA:
