@@ -180,13 +180,4 @@ complexity = base_weight(node_type)
 
 ---
 
-## Citation
-
-```bibtex
-@software{polymind2024,
-  title  = {PolyMind: Self-Evaluating Multi-Agent Research Scientist},
-  author = {Francielle Marques},
-  year   = {2026},
-  url    = {https://github.com/franciellemdn/polymind}
-}
-```
+Made by Francielle Marques @franciellemdn with Antigravity2
