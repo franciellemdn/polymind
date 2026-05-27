@@ -10,6 +10,10 @@ Usage:
     # Batch eval (N runs, measures consistency)
     python main.py batch --task "..." --n-runs 3
 
+    python main.py run --task "Does stopwords removal improve Logistic Regression classification accuracy on a synthetic 1000-sample sentiment task using scikit-learn" --max-iterations 1
+
+    python main.py run --task "Compare the training speed and accuracy of Logistic Regression vs Naive Bayes on a synthetic 500-sample classification dataset using scikit-learn" --max-iterations 1
+
     # Export graph visualization
     python main.py visualize
 """

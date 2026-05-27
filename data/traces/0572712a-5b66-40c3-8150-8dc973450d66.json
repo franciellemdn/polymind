@@ -1,0 +1,66 @@
+{
+  "run_id": "0572712a-5b66-40c3-8150-8dc973450d66",
+  "task": "How does character n-gram range (1-3 vs 3-5) affect training speed and accuracy on a synthetic classification task using TF-IDF and scikit-learn",
+  "timestamp": "2026-05-25T07:21:14.026650+00:00",
+  "overall_score": 0.7996,
+  "cost_usd": 0.000109,
+  "total_latency_ms": 0.0,
+  "model_calls": 4,
+  "routing_breakdown": {
+    "ollama": 2,
+    "openrouter": 2
+  },
+  "axes": {
+    "FactualGrounding": {
+      "score": 1.0,
+      "details": {
+        "total_findings": 2,
+        "grounded_findings": 2,
+        "ungrounded": []
+      },
+      "warnings": []
+    },
+    "SelfCorrectionQuality": {
+      "score": 0.6,
+      "details": {
+        "num_critiques": 1,
+        "avg_delta": -0.6,
+        "issue_coverage": 1.0,
+        "severity_breakdown": {
+          "minor": 0,
+          "major": 0,
+          "fatal": 1
+        }
+      },
+      "warnings": []
+    },
+    "RoutingEfficiency": {
+      "score": 0.3978,
+      "details": {
+        "total_cost_usd": 0.000109,
+        "cost_savings_ratio": 0.9946,
+        "local_calls": 2,
+        "frontier_calls": 2,
+        "experiment_success_rate": 0.0
+      },
+      "warnings": []
+    },
+    "ReasoningConsistency": {
+      "score": 1.0,
+      "details": {},
+      "warnings": [
+        "Only 1 run \u2014 consistency requires N\u22653; run with batch_eval()"
+      ]
+    },
+    "AgentDisagreement": {
+      "score": 1.0,
+      "details": {
+        "planner_confidence": 0.1,
+        "critic_revised_avg": 0.1,
+        "divergence": 0.0,
+        "taxonomy": "aligned"
+      },
+      "warnings": []
+    }
+  }
+}
